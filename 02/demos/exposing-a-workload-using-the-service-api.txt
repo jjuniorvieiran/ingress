@@ -44,7 +44,7 @@ kubectl get svc nginxhello -o yaml
    the actual clusterIP retrieved from the previous step.
 
 kubectl run -it --rm curl --restart=Never \
-    --image=nbrown/curl -- <clusterIP>:8080
+    --image=nbrown/curl -- 10.104.198.50:8080
 
 8. Check that the service can be consumed using the nginxhello service name.
 
