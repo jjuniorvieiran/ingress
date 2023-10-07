@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: host-rule-ingress
+spec:
+  defaultBackend:
+    service:
+      name: default-backend
+      port:
+        number: 80
+  rules:
+  - host: <host name #1>
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginxhello-blue
+            port:
+              number: 80
+        pathType: ImplementationSpecific
+  - host: <host name #2>
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginxhello-red
+            port:
+              number: 80
+        pathType: ImplementationSpecific

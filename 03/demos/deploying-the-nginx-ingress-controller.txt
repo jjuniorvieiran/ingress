@@ -1,0 +1,39 @@
+This exercise assumes a working Kubernetes cluster running on a public cloud
+platform (e.g. AWS, GCP, Azure), comprising of at least two 'worker' nodes.
+The cluster used in the demonstration in the course, was a managed Kubernetes
+service running on the DigitalOcean cloud platform. It also assumes a local
+installation of the Helm package manager (https://helm.sh/docs/intro/install/),
+and kubectl (https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+
+
+Exercise: DEPLOYING THE NGINX INGRESS CONTROLLER
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Add the Helm repo for the Nginx ingress controller to the local cache.
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
+2. Retrieve the latest chart information for the Nginx ingress controller.
+
+helm repo update ingress-nginx
+
+3. Deploy the Nginx ingress controller to the cluster.
+
+helm install ingress-nginx ingress-nginx/ingress-nginx \
+    --namespace ingress-nginx \
+    --create-namespace \
+    --set controller.watchIngressWithoutClass=true
+
+4. Check that a Helm release has been created for the ingress controller.
+
+helm list -n ingress-nginx
+
+5. Check that the ingress controller has been deployed to the new namespace.
+
+kubectl -n ingress-nginx get all
+
+6. Using the curl utility (or a web browser), try and access the external IP
+   address of the ingress controller's service object. Check that a '404 page
+   not found' response is returned by the ingress controller.
+
+curl <IP address>

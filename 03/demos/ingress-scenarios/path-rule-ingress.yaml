@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: path-rule-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  defaultBackend:
+    service:
+      name: default-backend
+      port:
+        number: 80
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: nginxhello-blue
+            port:
+              number: 80
+        path: /blue
+        pathType: Prefix
+  - http:
+      paths:
+      - backend:
+          service:
+            name: nginxhello-red
+            port:
+              number: 80
+        path: /red
+        pathType: Prefix

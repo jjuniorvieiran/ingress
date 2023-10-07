@@ -1,0 +1,90 @@
+This exercise assumes a working Kubernetes cluster, with the Nginx ingress
+controller deployed. The correct setup can be created by following the previous
+exercise in this module: deploying-the-nginx-ingress-controller.txt. The
+exercise requires the use of a domain name associated with the load balancer
+created by the ingress controller deployment.
+
+Exercise: USING INGRESS RULES TO ROUTE TO BACKENDS
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1.  Examine the default-backend.yaml file in the backends directory, to
+    familiarise yourself with the service that is to be deployed.
+
+cat backends/default-backend.yaml
+
+2.  Deploy the default backend service.
+
+kubectl apply -f backends/default-backend.yaml
+
+3. Check the service has started up in the cluster.
+
+kubectl get all
+
+4.  Examine the single-default-backend-ingress.yaml file in the directory called
+    ingress_scenarios, to familiarise yourself with the ingress for the default
+    backend.
+
+cat ingress-scenarios/single-default-backend-ingress.yaml
+
+5.  Create the ingress object for the default backend.
+
+kubectl apply -f ingress-scenarios/single-default-backend-ingress.yaml
+
+6.  Inspect the created object, and confirm it's as you expect it to be.
+
+kubectl describe ing single-default-backend-ingress
+
+7.  Create suitable DNS entries for your domain, that will enable you to
+    distinguish different hostnames for use in an ingress host rule, e.g.
+    dibble.sh, red.dibble.sh, blue.dibble.sh.
+
+8.  Use a web browser to navigate to your domain name, and confirm that the ingress
+    controller directs you to the default backend.
+
+9.  Remove the ingress.
+
+kubectl delete ing single-default-backend-ingress
+
+10.  Deploy the two variants of the nginxhello service.
+
+kubectl apply -f backends/
+
+11. Check the services have started up in the cluster.
+
+kubectl get all
+
+12. Examine the host-rule-ingress.yaml file to familiarise yourself with the
+    ingress. Add your host names to the definition.
+
+cat ingress-scenarios/host-rule-ingress.yaml
+
+13. Create the ingress object for the host-based rule.
+
+kubectl apply -f ingress-scenarios/host-rule-ingress.yaml
+
+14. Inspect the created object, and confirm it's as you expect it to be.
+
+kubectl describe ing host-rule-ingress
+
+15. Use a web browser to navigate to the two different host names, and confirm
+    that the ingress controller directs you to the appropriate backend.
+
+16. Remove the ingress.
+
+kubectl delete ing host-rule-ingress
+
+17. Examine the path-rule-ingress.yaml file to familiarise yourself with the
+    ingress. Note the ingress controller annotation.
+
+cat ingress-scenarios/path-rule-ingress.yaml
+
+18. Create the ingress object for the path-based rule.
+
+kubectl apply -f ingress-scenarios/path-rule-ingress.yaml
+
+19. Inspect the created object, and confirm it's as you expect it to be.
+
+kubectl describe ing path-rule-ingress
+
+20. Use a web browser to navigate to the URL for your domain name, with a path
+    that matches those specified in the ingress definition.
