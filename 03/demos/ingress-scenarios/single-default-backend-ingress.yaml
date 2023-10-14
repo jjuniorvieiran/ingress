@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: single-default-backend-ingress
 spec:
-  defaultBackend:
+  defaultBackend: # providing ingress default backend service
     service:
       name: default-backend
       port:
