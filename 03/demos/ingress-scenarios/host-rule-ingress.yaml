@@ -9,7 +9,7 @@ spec:
       port:
         number: 80
   rules:
-  - host: <host name #1>
+  - host: blue.dibble.sh
     http:
       paths:
       - backend:
@@ -18,7 +18,7 @@ spec:
             port:
               number: 80
         pathType: ImplementationSpecific
-  - host: <host name #2>
+  - host: red.dibble.sh
     http:
       paths:
       - backend:
