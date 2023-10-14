@@ -1,6 +1,6 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment # default deployment
 metadata:
   name: deafult-backend
   labels:
@@ -25,7 +25,7 @@ spec:
         - containerPort: 8080
 ---
 apiVersion: v1
-kind: Service
+kind: Service # with default services
 metadata:
   name: default-backend
   labels:

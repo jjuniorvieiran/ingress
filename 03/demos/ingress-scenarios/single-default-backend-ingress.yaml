@@ -1,5 +1,5 @@
 apiVersion: networking.k8s.io/v1
-kind: Ingress
+kind: Ingress # and with default services
 metadata:
   name: single-default-backend-ingress
 spec:
